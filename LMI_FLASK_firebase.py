@@ -1,3 +1,5 @@
+#nesse programa o firebase da SystemExit Error que nao conseguimos resolver
+
 from flask import Flask, render_template, request
 from firebase import firebase
 firebase=firebase.FirebaseApplication('https://login-teste-eedec.firebaseio.com/',None)
