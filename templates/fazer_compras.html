@@ -1,0 +1,105 @@
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>LMI - Fazer Compras</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+      <link rel="stylesheet" href="/static/bootstrap-reboot.min.css" type="text/css">
+      <link rel="stylesheet" href="/static/tarefas.css" type="text/css">
+  </head>
+  <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="/" class="brand-logo"><img class="img-responsive" style="max-width:150px; margin-top: 10px; margin-left: 10px;" src="{{ url_for('static', filename='images/main_logo.png') }}"></a>
+            <a href="#" data-activates="navsidebar" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/support/">Suporte <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/lojas/">Lojas <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/fazer_compras/">Fazer Compras <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/carrinho/">Carrinho <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://watson-assistant.ng.bluemix.net/us-south/9e4c15bb-a489-4e2a-97f4-8118473bff4f/workspaces/7a977b25-59e1-45f4-8364-412d16b21a2d/build/intents">Dúvidas? <span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav">
+                    <li id="menu-notloggedin" class="nav-item active">
+                        <a class="nav-link" href="/login/">Log in<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="menu_notloggedin" class="nav-item active">
+                        <a class="nav-link" href="/signup/">Sign up<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="menu_loggedin" class="nav-item active">
+                        <a class="nav-link" onclick="logout()" href="/">Log out<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+  </header>
+  <body>
+      <div id="loggedin_div" class="main-div">
+          <h2>Adicionar Produto</h2>
+            <form action="/fazer_compras/" method="POST">
+                <input type="text" name="nome_produto" placeholder="Produto">
+                <p class="mensagem-erro">{{ mensagem_erro_nome_produto }}</p>
+                <input name="marca" placeholder="Marca do produto">
+                <input type="text" name="quantidade" placeholder="Quantidade">
+                <p class="mensagem-erro">{{ mensagem_erro_quantidade }}</p>
+                <input type="submit" value="Adicionar à Lista">
+            </form>
+            <form action="/carrinho/" method="POST">
+                <input type="submit" value="Conferir Carrinho">
+            </form>  
+            <h2>A Comprar</h2>
+            <ul>
+            {% for produto in produtos %}
+                {% if not produto['feito'] %}
+                <li>
+                    <h3>{{ produto['nome_produto'] }}</h3>
+                    <p>{{ produto['marca'] }}</p>
+                    <p>Quantidade: {{ produto['quantidade'] }}</p>
+                    <form action="/fazer_compras/" method="POST">
+                        <input type="hidden" name="id" value="{{ produto['id'] }}">
+                        <input type="hidden" name="feito" value="True">
+                        
+                    </form>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        <div id="notloggedin_div" class="notloggedin-div">
+              <h3>É necessário fazer login antes de acessar esse menu...</h3> 
+              <p>Ainda não tem uma conta? É rápido e fácil de criar, basta clicar abaixo em Sign up!</p>
+              <div class="text-center">
+                  <a href="/login/" class="btn btn-success">Log in</a> <a href="/signup/" class="btn btn-success">Sign up</a>
+              </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyBwDF--3SoEms3EJ2ddTNqzjNG5cyBQE5s",
+            authDomain: "login-teste-eedec.firebaseapp.com",
+            databaseURL: "https://login-teste-eedec.firebaseio.com",
+            projectId: "login-teste-eedec",
+            storageBucket: "login-teste-eedec.appspot.com",
+            messagingSenderId: "482803674567"
+           };
+           firebase.initializeApp(config);
+        </script>
+        <script src="{{ url_for('static', filename='js/fc.js') }}"></script>
+  </body>
+</html>
