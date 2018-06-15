@@ -1,0 +1,101 @@
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>LMI - Suporte</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+      <link rel="stylesheet" href="/static/bootstrap-reboot.min.css" type="text/css">
+      <link rel="stylesheet" href="/static/tarefas.css" type="text/css">
+  </head>
+  <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="/" class="brand-logo"><img class="img-responsive" style="max-width:150px; margin-top: 10px; margin-left: 10px;" src="{{ url_for('static', filename='images/main_logo.png') }}"></a>
+            <a href="#" data-activates="navsidebar" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/support/">Suporte <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/lojas/">Lojas <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/fazer_compras/">Fazer Compras <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/carrinho/">Carrinho <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://watson-assistant.ng.bluemix.net/us-south/9e4c15bb-a489-4e2a-97f4-8118473bff4f/workspaces/7a977b25-59e1-45f4-8364-412d16b21a2d/build/intents">Dúvidas? <span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav">
+                    <li id="menu-notloggedin" class="nav-item active">
+                        <a class="nav-link" href="/login/">Log in<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="menu_notloggedin" class="nav-item active">
+                        <a class="nav-link" href="/signup/">Sign up<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="menu_loggedin" class="nav-item active">
+                        <a class="nav-link" onclick="logout()" href="/">Log out<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+  </header>
+  <body>
+        <div class="container">
+            <div class="card-deck">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/gustavo.jpg') }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Gustavo Pierre</h5>
+                        <p class="card-text">Sou Gustavo, santista de 18 anos e aluno do 1o Semestre de Engenharia da computação no Insper. Apaixonado por futebol e sushi...</p>
+                        <div class="text-center">
+                            <a href="https://www.bib.com.br/" class="btn btn-success">Linked In</a> <a href="https://www.facebook.com/gustavo.pierre.5" class="btn btn-success">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/lucas.jpg') }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Lucas Muchaluat</h5>
+                        <p class="card-text">Sou Lucas, carioca de 18 anos e aluno do 1o Semestre de Engenharia da Computação no Insper. Apaixonado por tecnologia e programação...</p>
+                        <div class="text-center">
+                            <a href="https://www.linkedin.com/in/lucas-muchaluat-724737130/" class="btn btn-success">Linked In</a> <a href="https://www.facebook.com/lucas.muchaluat" class="btn btn-success">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/felipe.JPG') }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Felipe Tomé</h5>
+                        <p class="card-text">Sou Felipe, carioca de 18 anos e aluno do 1o Semestre de Engenharia Mecânica no Insper e na Unicamp. Apaixonado por física e surf...</p>
+                        <div class="text-center">
+                            <a href="https://www.linkedin.com/in/felipe-tom%C3%A9-holmvard-machado-600277133/" class="btn btn-success">Linked In</a> <a href="#" class="btn btn-success">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyBwDF--3SoEms3EJ2ddTNqzjNG5cyBQE5s",
+            authDomain: "login-teste-eedec.firebaseapp.com",
+            databaseURL: "https://login-teste-eedec.firebaseio.com",
+            projectId: "login-teste-eedec",
+            storageBucket: "login-teste-eedec.appspot.com",
+            messagingSenderId: "482803674567"
+           };
+           firebase.initializeApp(config);
+        </script>
+        <script src="{{ url_for('static', filename='js/suporte.js') }}"></script>
+  </body>
+</html>
